@@ -1,14 +1,21 @@
 ﻿using System;
 
-namespace Helpers {
+namespace HelpersForNet {
+    /// <summary>
+    /// Singleton pattern for a generic class that implements IDisposable and has a constructor with arity 0
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public static class Singleton<T> where T : class, IDisposable, new() {
 
         private static object lockingObject = new object();
         private static T singleTonObject;
 
+        /// <summary>
+        /// Returns the singleton instance
+        /// </summary>
         public static T Instance => InstanceCreation();
 
-        public static T InstanceCreation() {
+        private static T InstanceCreation() {
             if (singleTonObject == null) {
                 lock (lockingObject) {
                     if (singleTonObject == null) {
@@ -19,6 +26,9 @@ namespace Helpers {
             return singleTonObject;
         }
 
+        /// <summary>
+        /// Disposes the singleton instance
+        /// </summary>
         public static void Dispose() {
             Instance.Dispose();
             singleTonObject = null;

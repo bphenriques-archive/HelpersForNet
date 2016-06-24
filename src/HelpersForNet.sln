@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIHelpers", "Helpers\UIHelpers.csproj", "{63036DF7-218E-4253-8AA8-BE9C38C465DE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{C942DC82-0550-47F0-8043-44A33FBFEB0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIHelpers", "Helpers\HelpersForNet.csproj", "{63036DF7-218E-4253-8AA8-BE9C38C465DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
