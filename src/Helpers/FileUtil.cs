@@ -11,16 +11,18 @@ namespace HelpersForNet {
         /// Returns the current assembly location
         /// </summary>
         public static string CurrentDirectory => Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        
+
         /// <summary>
         /// Opens a SaveFileDialog with the given title and filter
         /// </summary>
         /// <param name="filter"></param>
         /// <param name="title"></param>
+        /// <param name="defaultPath">defaults as .</param>
         /// <returns>The path if the user selected a file or empty string if not</returns>
-        public static string FindDestinationFile(string filter, string title) {
+        public static string FindDestinationFile(string filter, string title, string defaultPath = ".") {
             using (SaveFileDialog saveFileDialog1 = new SaveFileDialog()) {
-                saveFileDialog1.InitialDirectory = ".";
+                saveFileDialog1.InitialDirectory = Path.GetDirectoryName(defaultPath);
+                saveFileDialog1.FileName = Path.GetFileName(defaultPath);
                 saveFileDialog1.Filter = filter;
                 saveFileDialog1.Title = title;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
