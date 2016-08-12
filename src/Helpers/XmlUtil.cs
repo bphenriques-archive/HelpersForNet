@@ -13,9 +13,19 @@ namespace HelpersForNet {
         /// <param name="filePath"></param>
         /// <returns></returns>
         public static T Load(string filePath) {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Couldn't find file at: " + filePath);            
+
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            FileStream file = new FileStream(filePath, FileMode.Open);
-            return (T)serializer.Deserialize(file);
+
+            using (FileStream file = new FileStream(filePath, FileMode.Open)) {
+                var obj = serializer.Deserialize(file);
+
+                if(obj == null)
+                    throw new FileLoadException("Error reading file (incorrect format?) at " + filePath);                
+
+                return (T)obj;
+            }
         }
 
         /// <summary>
@@ -24,9 +34,13 @@ namespace HelpersForNet {
         /// <param name="filePath"></param>
         /// <param name="obj"></param>
         public static void Save(string filePath, T obj) {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Couldn't find file at: " + filePath);
+
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            FileStream file = new FileStream(filePath, FileMode.Create);
-            serializer.Serialize(file, obj);
+            using (FileStream file = new FileStream(filePath, FileMode.Create)) {
+                serializer.Serialize(file, obj);
+            }
         }
     }
 }
